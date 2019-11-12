@@ -10,6 +10,7 @@
 import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
+import axios from 'axios';
 
 export default {
   name: 'app',
@@ -21,35 +22,41 @@ export default {
   data() {
     return {
       todos: [
-        {
-          id: 1,
-          title: "Todo One",
-          completed: false
-        },
-        {
-          id: 2,
-          title: "Todo Two",
-          completed: true
-        },
-        {
-          id: 3,
-          title: "Todo Three",
-          completed: false
-        },
+
       ]
     }
   },
   methods: {
     deleteTodo(id) {
-      this.todos = this.todos.filter(todo => todo.id !== id);
+      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        .then(res => this.todos = this.todos.filter(todo => todo.id !== id))
+        .catch(err => console.log(err));
+
+      // this.todos = this.todos.filter(todo => todo.id !== id);
     },
     addTodo(newTodo) {
+      // new code - load from API
+      const { title, completed } = newTodo;
+
+      axios.post('https://jsonplaceholder.typicode.com/todos', {
+        title,
+        completed
+      })
+        .then(res => this.todos.push(res.data))
+        .catch(err => console.log(err));
+
+      // old code - local data
       // push new item into object
-      this.todos.push(newTodo);
+      // this.todos.push(newTodo);
 
       // or use spread operator
       // this.todos = [...this.todos, newTodo];
     }
+  },
+  created() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      .then(res => this.todos = res.data)
+      .catch(err => console.log(err));
   }
 }
 </script>
