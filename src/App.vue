@@ -30,6 +30,7 @@ export default {
   methods: {
     deleteTodo(id) {
       // use firebase
+      let current = this;
       let selectItem = firebase.database().ref('todos/' + id);
       // Check that list exists
       selectItem.once('value')
@@ -38,6 +39,7 @@ export default {
         selectItem.remove()
         .then(function() {
           console.log("Deleted successfully");
+          current.todos = current.todos.filter(todo => todo.id !== id);
         }).catch(function(error) {
           console.log(error);
         });
