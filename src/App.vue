@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <Header />
-    <AddTodo v-on:add-todo="addTodo"/>
-    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
+    <br>
+    <div class="container">
+      <AddTodo v-on:add-todo="addTodo"/>
+      <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
+    </div>
+
   </div>
 </template>
 
@@ -113,17 +117,5 @@ export default {
   body {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.4;
-  }
-
-  .btn {
-    display: inline-block;
-    border: none;
-    background: #555;
-    color: #fff;
-    padding: 7px 20px;
-    cursor: pointer;
-  }
-  .btn:hover {
-    background: #666;
   }
 </style>

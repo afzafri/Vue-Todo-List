@@ -1,7 +1,15 @@
 <template>
-  <header class="header">
+  <!-- <header class="header">
     <h1>TodoList</h1>
-  </header>
+  </header> -->
+
+  <nav class="navbar navbar-dark bg-dark justify-content-center">
+    <!-- <span class="navbar-brand mb-0 h1">Vue Todo List</span> -->
+    <a class="navbar-brand" href="#">
+      <img src="@/assets/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      Todo List
+    </a>
+  </nav>
 </template>
 
 <script>
@@ -9,17 +17,3 @@
     name: "Header"
   }
 </script>
-
-<style scoped>
-  .header {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-  }
-  .header a {
-    color: #fff;
-    padding-right: 5px;
-    text-decoration: none;
-  }
-</style>

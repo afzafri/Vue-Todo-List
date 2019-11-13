@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div v-for="todo in todos" v-bind:key="todo.id">
+  <div class="card">
+    <ul class="list-group list-group-flush" v-for="todo in todos" v-bind:key="todo.id">
       <TodoItem v-bind:todo="todo" v-on:del-todo="$emit('del-todo', todo.id)"/>
-    </div>
+    </ul>
   </div>
 </template>
 

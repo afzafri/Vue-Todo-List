@@ -1,9 +1,17 @@
 <template>
   <div>
-    <form @submit="addTodo">
-      <input type="text" v-model="title" name="title" placeholder="Add Todo...">
-      <input type="submit" value="Submit" class="btn">
-    </form>
+    <div class="card bg-light">
+      <div class="card-body">
+        <form @submit="addTodo">
+          <div class="input-group">
+            <input type="text" class="form-control" v-model="title" name="title" placeholder="Add Todo...">
+            <div class="input-group-append">
+              <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,16 +42,3 @@ import uuid from 'uuid';
     }
   }
 </script>
-
-<style scoped>
-  form {
-    display: flex;
-  }
-  input[type="text"] {
-    flex: 10;
-    padding: 5px;
-  }
-  input[type="submit"] {
-    flex: 2;
-  }
-</style>
