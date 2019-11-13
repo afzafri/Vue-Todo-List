@@ -11,6 +11,7 @@ import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import axios from 'axios';
+import firebase from './Firebase';
 
 export default {
   name: 'app',
@@ -36,14 +37,23 @@ export default {
     },
     addTodo(newTodo) {
       // new code - load from API
-      const { title, completed } = newTodo;
+      const { id, title, completed } = newTodo;
 
-      axios.post('https://jsonplaceholder.typicode.com/todos', {
-        title,
-        completed
+      // use Firebase
+      firebase.database().ref('todos/' + id).set({
+        id: id,
+        title: title,
+        completed: completed
       })
-        .then(res => this.todos.push(res.data))
+        .then()
         .catch(err => console.log(err));
+
+      // axios.post('https://jsonplaceholder.typicode.com/todos', {
+      //   title,
+      //   completed
+      // })
+      //   .then(res => this.todos.push(res.data))
+      //   .catch(err => console.log(err));
 
       // old code - local data
       // push new item into object
@@ -54,9 +64,20 @@ export default {
     }
   },
   created() {
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-      .then(res => this.todos = res.data)
-      .catch(err => console.log(err));
+    // use firebase
+    let current = this;
+    firebase.database().ref('todos').on('value', function(snapshot) {
+    let returnArr = [];
+    snapshot.forEach(function(childSnapshot) {
+        returnArr.push(childSnapshot.val());
+        // Fill the local data property with Firebase data
+        current.todos = returnArr;
+      });
+    });
+
+    // axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    //   .then(res => this.todos = res.data)
+    //   .catch(err => console.log(err));
   }
 }
 </script>
