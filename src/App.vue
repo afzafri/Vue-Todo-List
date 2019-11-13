@@ -51,13 +51,14 @@ export default {
     },
     addTodo(newTodo) {
       // new code - load from API
-      const { id, title, completed } = newTodo;
+      const { id, title, completed, timestamp } = newTodo;
 
       // use Firebase
       firebase.database().ref('todos/' + id).set({
         id: id,
         title: title,
-        completed: completed
+        completed: completed,
+        timestamp: timestamp
       })
         .then(function() {
           console.log('item inserted.')
@@ -84,7 +85,7 @@ export default {
   created() {
     // use firebase
     let current = this;
-    firebase.database().ref('todos').on('value', function(snapshot) {
+    firebase.database().ref('todos').orderByChild('timestamp').on('value', function(snapshot) {
     let returnArr = [];
     snapshot.forEach(function(childSnapshot) {
         returnArr.push(childSnapshot.val());

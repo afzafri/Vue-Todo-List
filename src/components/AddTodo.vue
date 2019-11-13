@@ -19,10 +19,12 @@ import uuid from 'uuid';
     methods: {
       addTodo(e) {
         e.preventDefault();
+
         const newTodo = {
           id: uuid.v4(),
           title: this.title,
-          completed: false
+          completed: false,
+          timestamp: new Date().getTime()
         }
         // Send to parents
         this.$emit('add-todo', newTodo);
