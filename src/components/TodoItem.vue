@@ -9,12 +9,24 @@
 </template>
 
 <script>
+  import firebase from '../Firebase';
+
   export default {
     name: "TodoItem",
     props: ["todo"],
     methods: {
       markComplete() {
-        this.todo.completed = !this.todo.completed;
+        let current = this;
+        current.todo.completed = !current.todo.completed;
+
+        // Update the "completed" property to match local property
+        firebase.database().ref().child('todos/' + this.todo.id).update({
+          completed: current.todo.completed
+        }).then(function() {
+          console.log("Item marked as completed.");
+        }).catch(function(err) {
+          console.log(err);
+        });
       }
     }
   }
