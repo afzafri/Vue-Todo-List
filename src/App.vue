@@ -29,9 +29,23 @@ export default {
   },
   methods: {
     deleteTodo(id) {
-      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then(res => this.todos = this.todos.filter(todo => todo.id !== id))
-        .catch(err => console.log(err));
+      // use firebase
+      let selectItem = firebase.database().ref('todos/' + id);
+      // Check that list exists
+      selectItem.once('value')
+      .then(() => {
+        // Call remove() function
+        selectItem.remove()
+        .then(function() {
+          console.log("Deleted successfully");
+        }).catch(function(error) {
+          console.log(error);
+        });
+      })
+
+      // axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      //   .then(res => this.todos = this.todos.filter(todo => todo.id !== id))
+      //   .catch(err => console.log(err));
 
       // this.todos = this.todos.filter(todo => todo.id !== id);
     },
@@ -45,8 +59,12 @@ export default {
         title: title,
         completed: completed
       })
-        .then()
-        .catch(err => console.log(err));
+        .then(function() {
+          console.log('item inserted.')
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
 
       // axios.post('https://jsonplaceholder.typicode.com/todos', {
       //   title,
