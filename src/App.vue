@@ -11,15 +11,11 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import axios from 'axios';
 import firebase from './Firebase';
-import Toasted from 'vue-toasted';
-
-Vue.use(Toasted);
 
 export default {
   name: 'app',
