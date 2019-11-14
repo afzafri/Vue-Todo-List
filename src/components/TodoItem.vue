@@ -5,6 +5,14 @@
     <button @click="$emit('del-todo', todo.id)" class="float-right btn btn-danger btn-circle btn-circle-sm m-1">
       <i class="fas fa-trash"></i>
     </button>
+
+    <div class="mt-2">
+      <small class="text-muted float-left">
+        <i class="far fa-clock"></i>
+        {{moment(todo.timestamp).format('DD MMM YY, h:mm A')}}
+      </small>
+    </div>
+
   </li>
 </template>
 
@@ -36,7 +44,7 @@
               icon : 'error'
           });
         });
-      }
+      },
     }
   }
 </script>
