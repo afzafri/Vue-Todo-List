@@ -14,7 +14,6 @@
 import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
-import axios from 'axios';
 import firebase from './Firebase';
 
 export default {
