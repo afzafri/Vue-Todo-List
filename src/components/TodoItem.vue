@@ -23,7 +23,8 @@
         firebase.database().ref().child('todos/' + this.todo.id).update({
           completed: current.todo.completed
         }).then(function() {
-          current.$toasted.success('Item marked as completed', {
+          var msg = (current.todo.completed) ? 'Item marked as completed' : 'Item marked as incomplete';
+          current.$toasted.success(msg, {
               theme: "bubble",
               duration : 1000,
               icon : 'check'
