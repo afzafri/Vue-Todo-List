@@ -11,11 +11,15 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import axios from 'axios';
 import firebase from './Firebase';
+import Toasted from 'vue-toasted';
+
+Vue.use(Toasted);
 
 export default {
   name: 'app',
@@ -99,6 +103,12 @@ export default {
         current.todos = returnArr;
       });
     });
+
+    this.$toasted.success('hello billo', {
+        theme: "bubble",
+        duration : 1000,
+        icon : 'check'
+    })
 
     // axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
     //   .then(res => this.todos = res.data)
