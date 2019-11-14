@@ -23,9 +23,17 @@
         firebase.database().ref().child('todos/' + this.todo.id).update({
           completed: current.todo.completed
         }).then(function() {
-          console.log("Item marked as completed.");
+          current.$toasted.success('Item marked as completed', {
+              theme: "bubble",
+              duration : 1000,
+              icon : 'check'
+          });
         }).catch(function(err) {
-          console.log(err);
+          current.$toasted.error('Error! '+err, {
+              theme: "bubble",
+              duration : 1000,
+              icon : 'error'
+          });
         });
       }
     }

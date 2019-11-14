@@ -41,10 +41,19 @@ export default {
         // Call remove() function
         selectItem.remove()
         .then(function() {
-          console.log("Deleted successfully");
           current.todos = current.todos.filter(todo => todo.id !== id);
-        }).catch(function(error) {
-          console.log(error);
+
+          current.$toasted.success('Deleted successfully', {
+              theme: "bubble",
+              duration : 1000,
+              icon : 'check'
+          });
+        }).catch(function(err) {
+          current.$toasted.error('Error! '+err, {
+              theme: "bubble",
+              duration : 1000,
+              icon : 'error'
+          });
         });
       })
 
@@ -55,7 +64,8 @@ export default {
       // this.todos = this.todos.filter(todo => todo.id !== id);
     },
     addTodo(newTodo) {
-      // new code - load from API
+      // new code - load from Firebase
+      let current = this;
       const { id, title, completed, timestamp } = newTodo;
 
       // use Firebase
@@ -66,10 +76,18 @@ export default {
         timestamp: timestamp
       })
         .then(function() {
-          console.log('item inserted.')
+          current.$toasted.success('New item inserted', {
+              theme: "bubble",
+              duration : 1000,
+              icon : 'check'
+          });
         })
         .catch(function(err) {
-          console.log(err);
+          current.$toasted.error('Error! '+err, {
+              theme: "bubble",
+              duration : 1000,
+              icon : 'error'
+          });
         });
 
       // axios.post('https://jsonplaceholder.typicode.com/todos', {
@@ -98,12 +116,6 @@ export default {
         current.todos = returnArr;
       });
     });
-
-    this.$toasted.success('hello billo', {
-        theme: "bubble",
-        duration : 1000,
-        icon : 'check'
-    })
 
     // axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
     //   .then(res => this.todos = res.data)
