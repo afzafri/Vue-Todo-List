@@ -12,7 +12,7 @@
     "core-js": "^3.3.2",
     "firebase": "^7.3.0",
     "material-icons": "^0.3.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "uuid": "^3.3.3",
     "vue": "^2.6.10",
     "vue-toasted": "^1.1.27"
